@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine Kids - Professor Lian</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #fd79a8;
+            --bg: #f0f2f5;
+            --text: #2d3436;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .movie-title {
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .movie-year {
+            font-size: 0.85rem;
+            color: #636e72;
+            font-weight: normal;
+        }
+
+        /* Badges de Classificação Corrigidos */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            text-align: center;
+            min-width: 40px;
+        }
+
+        .badge.livre {
+            background-color: #00b894; /* Verde para Livre */
+        }
+
+        .badge.dez {
+            background-color: #f39c12; /* Laranja/Amarelo para 10 anos */
+            color: white;
+        }
+
+        .btn-watch {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(253, 121, 168, 0.3);
+            white-space: nowrap;
+        }
+
+        .btn-watch:hover {
+            background: #e84393;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(253, 121, 168, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            height: 80%;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎬 Cine Kids</h1>
+    <p>Lista Especial de Filmes - Professor Lian</p>
+</header>
+
+<div class="container">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Filme</th>
+                    <th>Duração</th>
+                    <th>Classificação</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="movie-tbody">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+    </div>
+</div>
+
+<footer>
+    © 2024 Cine Kids Professor Lian. Revisão Oficial - Classificação Indicativa.
+</footer>
+
+<script>
+    const movies = [
+        { title: "A Fantástica Fábrica de Chocolate", year: "2005", duration: "115 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1Ur_nf2MtyRwrrgmUECUh9ZBuLwvZ4gtZ/view", emoji: "🍫" },
+        { title: "Tigrão: O Filme", year: "2000", duration: "77 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1_LrCP9tqW5NqjuRGU0wxcbPE4UcVvJ1u/view?pli=1", emoji: "🐯" },
+        { title: "Mogli: O Menino Lobo", year: "1967", duration: "78 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1NOX4P2PcUeIHWUgnyp-B8sRR_qLz5mNG/view", emoji: "🐺" },
+        { title: "Monstros S.A.", year: "2001", duration: "92 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1UB8XE4xI7dRV1z9FN6K0ByQszjTp7uiW/view", emoji: "👁️" },
+        { title: "Procurando Nemo", year: "2003", duration: "100 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1y0iuQrmtLcNajI9sN6-HdLUHxRkNaVdT/view", emoji: "🐠" },
+        { title: "Vida de Inseto", year: "1998", duration: "95 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1SSdfirb4tpLgkc_SaFno23PKyTEIwOQd/view", emoji: "🐜" },
+        { title: "Alice no País das Maravilhas", year: "1951", duration: "75 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1moS-hQmf68tDQUpQtxbVVhkpqk103g7l/view", emoji: "☕" },
+        { title: "Valente", year: "2012", duration: "93 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1xQ5p0F4Ys5eS9yYidaIpWZZ5DvJo6WgA/view", emoji: "🏹" },
+        { title: "Up: Altas Aventuras", year: "2009", duration: "96 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1zcYKgzbh0adWyEIe5Y1BaAiuKnfp-g9t/view", emoji: "🎈" },
+        { title: "WALL-E", year: "2008", duration: "98 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1MiqOg2g2MbKRwexsa1xxF4Uxa6Y9-saJ/view", emoji: "🤖" },
+        { title: "A Nova Onda do Kronk", year: "2005", duration: "72 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1rIrZP6qGfxzVllI4kx4BxrUpBU7yBZtE/view", emoji: "🍳" },
+        { title: "Carros 2", year: "2011", duration: "106 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1-C8Uqqkf_2zH1l6z3H1qQ3CuyV2OOdFb/view", emoji: "🏎️" },
+        { title: "Toy Story: Coleção", year: "Série", duration: "Vários", rating: "L", ratingClass: "livre", link: "https://photos.google.com/share/AF1QipNr24Wad2AvpF-FRCJF_mo_lAKLWqeBJZcgP6YU6qGIg54MDBctRKT05f6TW9LNPA?key=TDlFYWlreGpWV0dQN0dDU1pxcFdsalBlaThUckNR", emoji: "🤠" },
+        { title: "Ratatouille", year: "2007", duration: "111 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/0B7h6w2STaJk6Uy1xWml0TWk4bDA/view?resourcekey=0-dFZsMEx19Amfs4FWH2MTkA", emoji: "🐭" },
+        { title: "Extraordinário", year: "2018", duration: "113 min", rating: "10", ratingClass: "dez", link: "https://drive.google.com/drive/folders/16GlPd7dw8wX2mOiq26al4dStRsK_lbFX", emoji: "🚀" },
+        { title: "A Noiva Cadáver", year: "2005", duration: "77 min", rating: "10", ratingClass: "dez", link: "https://drive.google.com/file/d/1XLXnPnbC_vp5sOKzxoz8Mt_O1sDPiupD/view", emoji: "👰" },
+        { title: "Meu Amigo Totoro", year: "1988", duration: "86 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1xc1I8CoxmqgipxrIvWJfdIfXv4vEAPnR/view", emoji: "🐾" },
+        { title: "A Viagem de Chihiro", year: "2001", duration: "125 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1EH5wNqaKTzlrni8DArtsuadv4BbE4WH3/view", emoji: "🐉" },
+        { title: "Zootopia", year: "2016", duration: "108 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1cpHkt1yJx9CK3zW4OVhI0WkrqAb-cNXB/view", emoji: "🦊" }
+    ];
+
+    const tbody = document.getElementById('movie-tbody');
+    const modal = document.getElementById('videoModal');
+    const iframe = document.getElementById('videoFrame');
+
+    movies.forEach(movie => {
+        const tr = document.createElement('tr');
+        
+        const ratingText = movie.rating === "L" ? "Livre" : movie.rating + " anos";
+
+        tr.innerHTML = `
+            <td>
+                <div class="movie-title">
+                    <span>${movie.emoji}</span>
+                    <div>
+                        ${movie.title}
+                        <div class="movie-year">${movie.year ? movie.year : ''}</div>
+                    </div>
+                </div>
+            </td>
+            <td>${movie.duration}</td>
+            <td><span class="badge ${movie.ratingClass}">${ratingText}</span></td>
+            <td>
+                <button class="btn-watch" onclick="openModal('${movie.link}')">▶ Assistir</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    function openModal(link) {
+        let embedLink = link.replace(/\/view(\?.*)?/, '/preview');
+        
+        if(link.includes('folders') || link.includes('photos.google')) {
+            window.open(link, '_blank');
+            return;
+        }
+
+        iframe.src = embedLink;
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+        modal.style.display = 'none';
+        iframe.src = ''; 
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
