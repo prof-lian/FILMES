@@ -3,201 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cine Kids - Professor Lian</title>
+    <title>Dicas de Filmes - Professor Lian Ribeiro</title>
     <style>
         :root {
-            --primary: #6c5ce7;
-            --secondary: #a29bfe;
-            --accent: #fd79a8;
-            --bg: #f0f2f5;
-            --text: #2d3436;
+            /* Cores estilo GitHub Pages / Laboratório de Informática */
+            --primary: #0366d6; /* Azul Tech */
+            --secondary: #24292e; /* Cinza Escuro do GitHub */
+            --accent: #28a745; /* Verde para botões de destaque */
+            --bg: #f6f8fa;
+            --text: #24292e;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
         }
 
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--secondary), #1b1f23);
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--primary);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        header h1 { margin: 0; font-size: 2.2rem; }
+        header p { margin-top: 10px; font-size: 1.2rem; color: #c8e1ff; font-weight: 500;}
 
-        header p {
-            margin-top: 10px;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
 
         .table-container {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             overflow-x: auto;
+            border: 1px solid #e1e4e8;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        thead { background-color: var(--primary); color: white; }
+        th, td { padding: 15px 20px; border-bottom: 1px solid #e1e4e8; }
+        
+        tbody tr:hover { background-color: #f1f8ff; }
 
-        thead {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        th, td {
-            padding: 15px 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        tbody tr {
-            transition: background 0.2s ease;
-        }
-
-        tbody tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .movie-title {
-            font-weight: bold;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .movie-year {
-            font-size: 0.85rem;
-            color: #636e72;
-            font-weight: normal;
-        }
-
-        /* Badges de Classificação Corrigidos */
+        .movie-title { font-weight: bold; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
+        
         .badge {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: white;
-            display: inline-block;
-            text-align: center;
-            min-width: 40px;
+            padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; color: white;
         }
+        .badge.livre { background-color: var(--accent); }
+        .badge.dez { background-color: #f39c12; }
 
-        .badge.livre {
-            background-color: #00b894; /* Verde para Livre */
-        }
-
-        .badge.dez {
-            background-color: #f39c12; /* Laranja/Amarelo para 10 anos */
-            color: white;
-        }
-
+        .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
         .btn-watch {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-            transition: background 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(253, 121, 168, 0.3);
-            white-space: nowrap;
+            background: var(--primary); color: white; text-decoration: none;
+            padding: 6px 14px; border-radius: 6px; font-size: 0.8rem;
+            font-weight: 600; cursor: pointer; border: none; transition: 0.2s;
         }
+        .btn-watch:hover { background: #0056b3; transform: translateY(-2px); }
 
-        .btn-watch:hover {
-            background: #e84393;
-            transform: scale(1.05);
-            box-shadow: 0 6px 15px rgba(253, 121, 168, 0.4);
-        }
-
+        /* Modal */
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
+            display: none; position: fixed; z-index: 1000;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
         }
+        .modal-content { position: relative; width: 90%; max-width: 1000px; height: 80%; background: #000; border-radius: 8px; }
+        .close-btn { position: absolute; top: -40px; right: 0; color: white; font-size: 35px; cursor: pointer; }
+        iframe { width: 100%; height: 100%; border: none; border-radius: 8px;}
 
-        .modal-content {
-            position: relative;
-            width: 80%;
-            max-width: 900px;
-            height: 80%;
-            background: #000;
-            border-radius: 10px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        footer { 
+            text-align: center; 
+            padding: 40px; 
+            color: #586069; 
+            background: white;
+            border-top: 1px solid #e1e4e8;
+            margin-top: 40px;
         }
-
-        .close-btn {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #b2bec3;
-            font-size: 0.9rem;
-        }
+        footer p { margin: 5px 0; font-size: 0.95rem; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🎬 Cine Kids</h1>
-    <p>Lista Especial de Filmes - Professor Lian</p>
+    <h1>Dicas de Filmes</h1>
+    <p>🎬💻 Professor de Informática Lian Ribeiro</p>
 </header>
 
 <div class="container">
@@ -205,13 +98,13 @@
         <table>
             <thead>
                 <tr>
-                    <th>Filme</th>
+                    <th>Título</th>
                     <th>Duração</th>
                     <th>Classificação</th>
-                    <th>Ação</th>
+                    <th>Assistir</th>
                 </tr>
             </thead>
-            <tbody id="movie-tbody">
+            <tbody id="movie-list">
                 </tbody>
         </table>
     </div>
@@ -225,83 +118,132 @@
 </div>
 
 <footer>
-    © 2024 Cine Kids Professor Lian. Revisão Oficial - Classificação Indicativa.
+    <p>Dúvidas e informações: <a href="mailto:Lian.ribeiro@edu.uberabadigital.br">Lian.ribeiro@edu.uberabadigital.br</a></p>
+    <p>© <span id="ano-atual"></span> Professor de informática Lian Ribeiro</p>
 </footer>
 
 <script>
+    // Define o ano atual de forma automática no rodapé
+    document.getElementById('ano-atual').textContent = new Date().getFullYear();
+
     const movies = [
-        { title: "A Fantástica Fábrica de Chocolate", year: "2005", duration: "115 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1Ur_nf2MtyRwrrgmUECUh9ZBuLwvZ4gtZ/view", emoji: "🍫" },
-        { title: "Tigrão: O Filme", year: "2000", duration: "77 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1_LrCP9tqW5NqjuRGU0wxcbPE4UcVvJ1u/view?pli=1", emoji: "🐯" },
-        { title: "Mogli: O Menino Lobo", year: "1967", duration: "78 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1NOX4P2PcUeIHWUgnyp-B8sRR_qLz5mNG/view", emoji: "🐺" },
-        { title: "Monstros S.A.", year: "2001", duration: "92 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1UB8XE4xI7dRV1z9FN6K0ByQszjTp7uiW/view", emoji: "👁️" },
-        { title: "Procurando Nemo", year: "2003", duration: "100 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1y0iuQrmtLcNajI9sN6-HdLUHxRkNaVdT/view", emoji: "🐠" },
-        { title: "Vida de Inseto", year: "1998", duration: "95 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1SSdfirb4tpLgkc_SaFno23PKyTEIwOQd/view", emoji: "🐜" },
-        { title: "Alice no País das Maravilhas", year: "1951", duration: "75 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1moS-hQmf68tDQUpQtxbVVhkpqk103g7l/view", emoji: "☕" },
-        { title: "Valente", year: "2012", duration: "93 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1xQ5p0F4Ys5eS9yYidaIpWZZ5DvJo6WgA/view", emoji: "🏹" },
-        { title: "Up: Altas Aventuras", year: "2009", duration: "96 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1zcYKgzbh0adWyEIe5Y1BaAiuKnfp-g9t/view", emoji: "🎈" },
-        { title: "WALL-E", year: "2008", duration: "98 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1MiqOg2g2MbKRwexsa1xxF4Uxa6Y9-saJ/view", emoji: "🤖" },
-        { title: "A Nova Onda do Kronk", year: "2005", duration: "72 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1rIrZP6qGfxzVllI4kx4BxrUpBU7yBZtE/view", emoji: "🍳" },
-        { title: "Carros 2", year: "2011", duration: "106 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1-C8Uqqkf_2zH1l6z3H1qQ3CuyV2OOdFb/view", emoji: "🏎️" },
-        { title: "Toy Story: Coleção", year: "Série", duration: "Vários", rating: "L", ratingClass: "livre", link: "https://photos.google.com/share/AF1QipNr24Wad2AvpF-FRCJF_mo_lAKLWqeBJZcgP6YU6qGIg54MDBctRKT05f6TW9LNPA?key=TDlFYWlreGpWV0dQN0dDU1pxcFdsalBlaThUckNR", emoji: "🤠" },
-        { title: "Ratatouille", year: "2007", duration: "111 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/0B7h6w2STaJk6Uy1xWml0TWk4bDA/view?resourcekey=0-dFZsMEx19Amfs4FWH2MTkA", emoji: "🐭" },
-        { title: "Extraordinário", year: "2018", duration: "113 min", rating: "10", ratingClass: "dez", link: "https://drive.google.com/drive/folders/16GlPd7dw8wX2mOiq26al4dStRsK_lbFX", emoji: "🚀" },
-        { title: "A Noiva Cadáver", year: "2005", duration: "77 min", rating: "10", ratingClass: "dez", link: "https://drive.google.com/file/d/1XLXnPnbC_vp5sOKzxoz8Mt_O1sDPiupD/view", emoji: "👰" },
-        { title: "Meu Amigo Totoro", year: "1988", duration: "86 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1xc1I8CoxmqgipxrIvWJfdIfXv4vEAPnR/view", emoji: "🐾" },
-        { title: "A Viagem de Chihiro", year: "2001", duration: "125 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1EH5wNqaKTzlrni8DArtsuadv4BbE4WH3/view", emoji: "🐉" },
-        { title: "Zootopia", year: "2016", duration: "108 min", rating: "L", ratingClass: "livre", link: "https://drive.google.com/file/d/1cpHkt1yJx9CK3zW4OVhI0WkrqAb-cNXB/view", emoji: "🦊" }
+        // DESENHOS
+        { title: "📺 Desenhos (Chaves, Pateta, Luluzinha, Thundercats e outros...)", dur: "Menos de 50min", rat: "L", rC: "livre", links: [{l: "Abrir Pasta", u: "https://drive.google.com/drive/folders/0B1lPp7clarJhNVRIdVBoNGdROHc?resourcekey=0-7ikvay_eGGhmKGX4Q_ohYg"}] },
+        
+        // FILMES UNITÁRIOS
+        { title: "🍫 A Fantástica Fábrica de Chocolate", dur: "115 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1Ur_nf2MtyRwrrgmUECUh9ZBuLwvZ4gtZ/view"}] },
+        { title: "🐯 Tigrão: O Filme", dur: "77 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1_LrCP9tqW5NqjuRGU0wxcbPE4UcVvJ1u/view?pli=1"}] },
+        { title: "🐺 Mogli: O Menino Lobo", dur: "78 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1NOX4P2PcUeIHWUgnyp-B8sRR_qLz5mNG/view"}] },
+        { title: "👁️ Monstros S.A.", dur: "92 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1UB8XE4xI7dRV1z9FN6K0ByQszjTp7uiW/view"}] },
+        { title: "🐠 Procurando Nemo", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1y0iuQrmtLcNajI9sN6-HdLUHxRkNaVdT/view"}] },
+        { title: "🐜 Vida de Inseto", dur: "95 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1SSdfirb4tpLgkc_SaFno23PKyTEIwOQd/view"}] },
+        { title: "☕ Alice no País das Maravilhas", dur: "75 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1moS-hQmf68tDQUpQtxbVVhkpqk103g7l/view"}] },
+        { title: "🏹 Valente", dur: "93 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1xQ5p0F4Ys5eS9yYidaIpWZZ5DvJo6WgA/view"}] },
+        { title: "🎈 Up: Altas Aventuras", dur: "96 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1zcYKgzbh0adWyEIe5Y1BaAiuKnfp-g9t/view"}] },
+        { title: "🤖 WALL-E", dur: "98 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1MiqOg2g2MbKRwexsa1xxF4Uxa6Y9-saJ/view"}] },
+        { title: "🍳 A Nova Onda do Kronk", dur: "72 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1rIrZP6qGfxzVllI4kx4BxrUpBU7yBZtE/view"}] },
+        { title: "🏎️ Carros 2", dur: "106 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1-C8Uqqkf_2zH1l6z3H1qQ3CuyV2OOdFb/view"}] },
+        { title: "🤠 Toy Story: Coleção", dur: "Vários", rat: "L", rC: "livre", links: [{l: "Pasta", u: "https://photos.google.com/share/AF1QipNr24Wad2AvpF-FRCJF_mo_lAKLWqeBJZcgP6YU6qGIg54MDBctRKT05f6TW9LNPA?key=TDlFYWlreGpWV0dQN0dDU1pxcFdsalBlaThUckNR"}] },
+        { title: "🐭 Ratatouille", dur: "111 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/0B7h6w2STaJk6Uy1xWml0TWk4bDA/view?resourcekey=0-dFZsMEx19Amfs4FWH2MTkA"}] },
+        { title: "🚀 Extraordinário", dur: "113 min", rat: "10", rC: "dez", links: [{l: "Pasta", u: "https://drive.google.com/drive/folders/16GlPd7dw8wX2mOiq26al4dStRsK_lbFX"}] },
+        { title: "👰 A Noiva Cadáver", dur: "77 min", rat: "10", rC: "dez", links: [{l: "Filme", u: "https://drive.google.com/file/d/1XLXnPnbC_vp5sOKzxoz8Mt_O1sDPiupD/view"}] },
+        { title: "🐾 Meu Amigo Totoro", dur: "86 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1xc1I8CoxmqgipxrIvWJfdIfXv4vEAPnR/view"}] },
+        { title: "🐉 A Viagem de Chihiro", dur: "125 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1EH5wNqaKTzlrni8DArtsuadv4BbE4WH3/view"}] },
+        { title: "🦊 Zootopia", dur: "108 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1cpHkt1yJx9CK3zW4OVhI0WkrqAb-cNXB/view"}] },
+        { title: "🏀 Space Jam: Um Novo Legado", dur: "115 min", rat: "L", rC: "livre", links: [{l: "Pasta", u: "https://drive.google.com/drive/folders/1MiXMLAqPxz4H05nWt9aSHerIBH4fYtGI"}] },
+        { title: "🌊 Por Água Abaixo", dur: "85 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/11Jpfsm1Gw0H0tZrnmbiyvyC4INMgCHwF/view"}] },
+        { title: "🐶 Pets: A Vida Secreta dos Bichos", dur: "87 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/0B0px2VqARed2RHhaVHdrdHZqajg/view?resourcekey=0-NIbLcKMcS-wVYC4uoxMbBQ"}] },
+        { title: "💀 Viva: A Vida é uma Festa", dur: "105 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1QXhy1mXvSP1WgeFxc55gtED2Rq41yu7R/view"}] },
+        { title: "🕯️ Encanto", dur: "102 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1ALlHhabaleb1wdAxM81ibdbOH9ScdItK/view"}] },
+        { title: "🐓 A Fuga das Galinhas", dur: "84 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1Y3-Luweumbb_j8xFGUkUSPaNHNtfYTl1/view"}] },
+        { title: "🌳 O Lorax", dur: "86 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/0B1ajV4yek-QvVkVsSTIyLTJnd3c/view?resourcekey=0-oo99E4wqPCtgl2RB1poD2A"}] },
+        { title: "🧟 Monstros vs Alienígenas", dur: "94 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1VIaJ8UgoAJkIBtjtLjm1WIXJ0kFbLfAK/view"}] },
+        { title: "🐜 FormiguinhaZ", dur: "83 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1J5YVhVsNlnWHegTJc2u7CBP_uVWltCJj/view"}] },
+        { title: "👑 Anastasia", dur: "94 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1pojOqK9Jru4ZIzMO4VRzl2buVNyGjrtx/view"}] },
+        { title: "🌺 Lilo & Stitch", dur: "85 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1zHmDli6eJb7LZ93vk2lgPTRAGcQbKVrC/view"}] },
+        { title: "🍼 O Poderoso Chefinho", dur: "97 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/0B3baqLuxK3DaTDhqMU5mV21uSFU/view"}] },
+        { title: "🐼 Red: Crescer é uma Fera", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1oPSCCKT86kGlVkzYlPSWWg8R3QjmCBGT/view"}] },
+        { title: "🎤 Sing", dur: "108 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/0B7h6w2STaJk6WnpRaTJpQ05TcW8/view?resourcekey=0-YItT_p2K7x6CehqO4vwitw"}] },
+        { title: "🧠 Divertidamente", dur: "95 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1hjN4hKoFZsRGJgORLU1P2J7p2ShyM6oE/view"}] },
+        { title: "⚡ Bolt: Supercão", dur: "96 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1-89cwQDA6QU2TzvDxotDG9F8PQikME7j/view"}] },
+        { title: "🎷 Soul", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1rtkVcs_YRkoef2_zhxof4d4GKvj6eH2w/view"}] },
+
+        // GRUPOS E FRANQUIAS (Agrupados para ocupar menos espaço)
+        { title: "🏄‍♂️ Tá Dando Onda", dur: "85 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1SdJFXsH-0HB7s7coTY1p_KDr4NDNVQQv/view"},
+            {l: "2", u: "https://drive.google.com/file/d/0BwYoy_U8Yan8LXhtVWs5S3JsaEE/view"}
+        ]},
+        { title: "🔥 Como Treinar o seu Dragão", dur: "~95 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1vB6AVXPPOS8Qgadu0Pmwd8XVM6PFLAbB/view"},
+            {l: "2", u: "https://drive.google.com/file/d/1Yh1t1gPw9wo8cAYZwUQOJgbS0cZqXs9x/view"},
+            {l: "3", u: "https://drive.google.com/file/d/1tLHHKQoegzNkkWQLIeYIpLJAVIbbzgYz/view"}
+        ]},
+        { title: "🎒 Deu a Louca na Chapeuzinho", dur: "~80 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1out2aW68QeyHxxc9jOwckJlrGc7VfQIE/view"},
+            {l: "2", u: "https://drive.google.com/file/d/16Di_SCRLv3rcsRTonhzxJ3dZuzMZekGn/view"}
+        ]},
+        { title: "🍎 Deu a Louca", dur: "~80 min", rat: "L", rC: "livre", links: [
+            {l: "Cinderela", u: "https://drive.google.com/file/d/1saDgUdxgfxGDV6QPbBKoT0qmA8AW9To-/view"},
+            {l: "Branca", u: "https://drive.google.com/file/d/1SeM1ZSEzqyo_eaGPoA20nDh-NFfXw1di/view"}
+        ]},
+        { title: "👹 Shrek", dur: "~90 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/16m3-0bhs7lm8OJsEbmH7sEnHA2PCV0pJ/view"},
+            {l: "2", u: "https://drive.google.com/file/d/16obIMObq9fwjvcrtqvWtWMIkeBD03mjB/view"},
+            {l: "3", u: "https://drive.google.com/file/d/16tAEk7LC3sS48A-O0Fx1WuDS0BN1SweS/view"},
+            {l: "4", u: "https://drive.google.com/file/d/16wU4J9beNwBIQiwyHvgjuzNMZw9GqpUW/view"}
+        ]},
+        { title: "🐈 O Gato de Botas", dur: "~95 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1dazkiCXELE35EGwP70Cvy4nvfyLvt_Sz/view"},
+            {l: "2", u: "https://drive.google.com/file/d/1KiKWs3yH_uV1z1rg82pjJ_YTDKkBwpKr/view"}
+        ]},
+        { title: "🦒 Madagascar", dur: "~90 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1VnC7qSxnL-y-04q_snxUniyzz9AsLPP-/view"},
+            {l: "2", u: "https://drive.google.com/file/d/1VuAameCMpXe5oUn7oc8P8yNPQWcM7f3d/view"},
+            {l: "3", u: "https://drive.google.com/file/d/1VxzEoBQdOyDDXzMOXmPHoz9Ic4waBMch/view"}
+        ]},
+        { title: "❄️ A Era do Gelo", dur: "~90 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1A2tHf77Gq0m9upcZhz_0C9LW0XaY5ZDM/view"},
+            {l: "2", u: "https://drive.google.com/file/d/1KhUII2uqa8AvIBAMKE2WGbc0x7GbXNpr/view"},
+            {l: "3", u: "https://drive.google.com/file/d/1SDqRYt17-d5ITPCaA2-m921MnB9Ytlq7/view"},
+            {l: "4", u: "https://drive.google.com/file/d/1RilhUCEbGjWwJMPygjd8wIlNPvgUF5XD/view"}
+        ]},
+        { title: "🌕 Meu Malvado Favorito", dur: "~95 min", rat: "L", rC: "livre", links: [
+            {l: "1", u: "https://drive.google.com/file/d/1dBNIfCyEaYJFz7ADPKFADFsFTQLaMuFf/view"},
+            {l: "2", u: "https://drive.google.com/file/d/13pMcaTCF8MybGBqC1H--yapKZ2F3PxdR/view"}
+        ]}
     ];
 
-    const tbody = document.getElementById('movie-tbody');
-    const modal = document.getElementById('videoModal');
-    const iframe = document.getElementById('videoFrame');
+    const tbody = document.getElementById('movie-list');
 
-    movies.forEach(movie => {
+    movies.forEach(m => {
         const tr = document.createElement('tr');
-        
-        const ratingText = movie.rating === "L" ? "Livre" : movie.rating + " anos";
+        let btns = `<div class="btn-group">`;
+        m.links.forEach(link => {
+            btns += `<button class="btn-watch" onclick="openModal('${link.u}')">${link.l}</button>`;
+        });
+        btns += `</div>`;
 
         tr.innerHTML = `
-            <td>
-                <div class="movie-title">
-                    <span>${movie.emoji}</span>
-                    <div>
-                        ${movie.title}
-                        <div class="movie-year">${movie.year ? movie.year : ''}</div>
-                    </div>
-                </div>
-            </td>
-            <td>${movie.duration}</td>
-            <td><span class="badge ${movie.ratingClass}">${ratingText}</span></td>
-            <td>
-                <button class="btn-watch" onclick="openModal('${movie.link}')">▶ Assistir</button>
-            </td>
+            <td><div class="movie-title">${m.title}</div></td>
+            <td>${m.dur}</td>
+            <td><span class="badge ${m.rC}">${m.rat === 'L' ? 'Livre' : m.rat + ' anos'}</span></td>
+            <td>${btns}</td>
         `;
         tbody.appendChild(tr);
     });
 
-    function openModal(link) {
-        let embedLink = link.replace(/\/view(\?.*)?/, '/preview');
-        
-        if(link.includes('folders') || link.includes('photos.google')) {
-            window.open(link, '_blank');
-            return;
-        }
-
-        iframe.src = embedLink;
-        modal.style.display = 'flex';
+    function openModal(u) {
+        if(u.includes('folders') || u.includes('photos')) { window.open(u, '_blank'); return; }
+        document.getElementById('videoFrame').src = u.replace(/\/view(\?.*)?/, '/preview');
+        document.getElementById('videoModal').style.display = 'flex';
     }
 
     function closeModal() {
-        modal.style.display = 'none';
-        iframe.src = ''; 
+        document.getElementById('videoModal').style.display = 'none';
+        document.getElementById('videoFrame').src = '';
     }
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
+    window.onclick = (e) => { if(e.target == document.getElementById('videoModal')) closeModal(); }
 </script>
-
 </body>
 </html>
