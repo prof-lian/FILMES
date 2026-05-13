@@ -6,10 +6,9 @@
     <title>Dicas de Filmes - Professor Lian Ribeiro</title>
     <style>
         :root {
-            /* Cores estilo GitHub Pages / Laboratório de Informática */
-            --primary: #0366d6; /* Azul Tech */
-            --secondary: #24292e; /* Cinza Escuro do GitHub */
-            --accent: #28a745; /* Verde para botões de destaque */
+            --primary: #0366d6; 
+            --secondary: #24292e; 
+            --accent: #28a745; 
             --bg: #f6f8fa;
             --text: #24292e;
         }
@@ -30,9 +29,10 @@
         }
 
         header h1 { margin: 0; font-size: 2.2rem; }
-        header p { margin-top: 10px; font-size: 1.2rem; color: #c8e1ff; font-weight: 500;}
+        header .subtitle { margin-top: 10px; font-size: 1.2rem; color: #c8e1ff; font-weight: 500;}
+        header .update-info { margin-top: 8px; font-size: 0.95rem; color: #a3cbf7; font-style: italic; font-weight: 400; }
 
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; text-align: center; }
 
         .table-container {
             background: white;
@@ -40,6 +40,8 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             overflow-x: auto;
             border: 1px solid #e1e4e8;
+            text-align: left;
+            margin-bottom: 25px;
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -83,14 +85,14 @@
             margin-top: 40px;
         }
         footer p { margin: 5px 0; font-size: 0.95rem; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🎬Dicas de Filmes</h1>
-    <p>💻 Professor de Informática Lian Ribeiro</p>
+    <h1>Dicas de Filmes</h1>
+    <p class="subtitle">🎬💻 Professor de Informática Lian Ribeiro</p>
+    <p class="update-info">Lista atualizada mensalmente</p>
 </header>
 
 <div class="container">
@@ -118,18 +120,24 @@
 </div>
 
 <footer>
-       <p>© <span id="ano-atual"></span> 💻 Professor de informática -  Lian Ribeiro</p>
+    <p>© <span id="ano-atual"></span> Professor de informática Lian Ribeiro</p>
 </footer>
 
 <script>
-    // Define o ano atual de forma automática no rodapé
     document.getElementById('ano-atual').textContent = new Date().getFullYear();
 
     const movies = [
-        // DESENHOS
         { title: "📺 Desenhos (Chaves, Pateta, Luluzinha, Thundercats e outros...)", dur: "Menos de 50min", rat: "L", rC: "livre", links: [{l: "Abrir Pasta", u: "https://drive.google.com/drive/folders/0B1lPp7clarJhNVRIdVBoNGdROHc?resourcekey=0-7ikvay_eGGhmKGX4Q_ohYg"}] },
         
-        // FILMES UNITÁRIOS
+        { title: "🍔 Tá chovendo hambúrguer", dur: "~95 min", rat: "L", rC: "livre", links: [
+            {l: "Filme 1", u: "https://drive.google.com/file/d/1eO0AWTFGY3AcGdpMk0IxwDLRYQk38T_L/view?usp=drivesdk"},
+            {l: "Filme 2", u: "https://drive.google.com/file/d/1KmNzeS2729p1U8ryRk6PVUi1PaLeeynU/view?usp=drivesdk"}
+        ]},
+        { title: "🐿️ Alvin e os Esquilos", dur: "Vários", rat: "L", rC: "livre", links: [{l: "Pasta", u: "https://drive.google.com/drive/folders/1j1Z9LeN5F7pPeEtASxSEo0pp1wG8A-MU"}] },
+        { title: "🦴 Os Croods", dur: "Vários", rat: "L", rC: "livre", links: [{l: "Pasta", u: "https://drive.google.com/drive/folders/1az6XLtIKdbNXTjdhMRtfiajQfEkCkb92"}] },
+        { title: "🎀 Coleção Barbie", dur: "Vários", rat: "L", rC: "livre", links: [{l: "Pasta", u: "https://drive.google.com/drive/folders/1-WwzX7LeUlW8uPVv0esewKR2xVXQ_rmj"}] },
+        { title: "🎈 Up: Altas Aventuras", dur: "96 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1zcYKgzbh0adWyEIe5Y1BaAiuKnfp-g9t/view"}] },
+        { title: "🏹 Valente", dur: "93 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1mcZve98a6Icxv1KwAzZ7UdlPAzOMB1Ay/view?usp=drivesdk"}] },
         { title: "🍫 A Fantástica Fábrica de Chocolate", dur: "115 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1Ur_nf2MtyRwrrgmUECUh9ZBuLwvZ4gtZ/view"}] },
         { title: "🐯 Tigrão: O Filme", dur: "77 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1_LrCP9tqW5NqjuRGU0wxcbPE4UcVvJ1u/view?pli=1"}] },
         { title: "🐺 Mogli: O Menino Lobo", dur: "78 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1NOX4P2PcUeIHWUgnyp-B8sRR_qLz5mNG/view"}] },
@@ -137,8 +145,6 @@
         { title: "🐠 Procurando Nemo", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1y0iuQrmtLcNajI9sN6-HdLUHxRkNaVdT/view"}] },
         { title: "🐜 Vida de Inseto", dur: "95 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1SSdfirb4tpLgkc_SaFno23PKyTEIwOQd/view"}] },
         { title: "☕ Alice no País das Maravilhas", dur: "75 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1moS-hQmf68tDQUpQtxbVVhkpqk103g7l/view"}] },
-        { title: "🏹 Valente", dur: "93 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1xQ5p0F4Ys5eS9yYidaIpWZZ5DvJo6WgA/view"}] },
-        { title: "🎈 Up: Altas Aventuras", dur: "96 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1zcYKgzbh0adWyEIe5Y1BaAiuKnfp-g9t/view"}] },
         { title: "🤖 WALL-E", dur: "98 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1MiqOg2g2MbKRwexsa1xxF4Uxa6Y9-saJ/view"}] },
         { title: "🍳 A Nova Onda do Kronk", dur: "72 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1rIrZP6qGfxzVllI4kx4BxrUpBU7yBZtE/view"}] },
         { title: "🏎️ Carros 2", dur: "106 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1-C8Uqqkf_2zH1l6z3H1qQ3CuyV2OOdFb/view"}] },
@@ -167,49 +173,14 @@
         { title: "⚡ Bolt: Supercão", dur: "96 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1-89cwQDA6QU2TzvDxotDG9F8PQikME7j/view"}] },
         { title: "🎷 Soul", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1rtkVcs_YRkoef2_zhxof4d4GKvj6eH2w/view"}] },
 
-        // GRUPOS E FRANQUIAS (Agrupados para ocupar menos espaço)
-        { title: "🏄‍♂️ Tá Dando Onda", dur: "85 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1SdJFXsH-0HB7s7coTY1p_KDr4NDNVQQv/view"},
-            {l: "2", u: "https://drive.google.com/file/d/0BwYoy_U8Yan8LXhtVWs5S3JsaEE/view"}
-        ]},
-        { title: "🔥 Como Treinar o seu Dragão", dur: "~95 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1vB6AVXPPOS8Qgadu0Pmwd8XVM6PFLAbB/view"},
-            {l: "2", u: "https://drive.google.com/file/d/1Yh1t1gPw9wo8cAYZwUQOJgbS0cZqXs9x/view"},
-            {l: "3", u: "https://drive.google.com/file/d/1tLHHKQoegzNkkWQLIeYIpLJAVIbbzgYz/view"}
-        ]},
-        { title: "🎒 Deu a Louca na Chapeuzinho", dur: "~80 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1out2aW68QeyHxxc9jOwckJlrGc7VfQIE/view"},
-            {l: "2", u: "https://drive.google.com/file/d/16Di_SCRLv3rcsRTonhzxJ3dZuzMZekGn/view"}
-        ]},
-        { title: "🍎 Deu a Louca", dur: "~80 min", rat: "L", rC: "livre", links: [
-            {l: "Cinderela", u: "https://drive.google.com/file/d/1saDgUdxgfxGDV6QPbBKoT0qmA8AW9To-/view"},
-            {l: "Branca", u: "https://drive.google.com/file/d/1SeM1ZSEzqyo_eaGPoA20nDh-NFfXw1di/view"}
-        ]},
-        { title: "👹 Shrek", dur: "~90 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/16m3-0bhs7lm8OJsEbmH7sEnHA2PCV0pJ/view"},
-            {l: "2", u: "https://drive.google.com/file/d/16obIMObq9fwjvcrtqvWtWMIkeBD03mjB/view"},
-            {l: "3", u: "https://drive.google.com/file/d/16tAEk7LC3sS48A-O0Fx1WuDS0BN1SweS/view"},
-            {l: "4", u: "https://drive.google.com/file/d/16wU4J9beNwBIQiwyHvgjuzNMZw9GqpUW/view"}
-        ]},
-        { title: "🐈 O Gato de Botas", dur: "~95 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1dazkiCXELE35EGwP70Cvy4nvfyLvt_Sz/view"},
-            {l: "2", u: "https://drive.google.com/file/d/1KiKWs3yH_uV1z1rg82pjJ_YTDKkBwpKr/view"}
-        ]},
-        { title: "🦒 Madagascar", dur: "~90 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1VnC7qSxnL-y-04q_snxUniyzz9AsLPP-/view"},
-            {l: "2", u: "https://drive.google.com/file/d/1VuAameCMpXe5oUn7oc8P8yNPQWcM7f3d/view"},
-            {l: "3", u: "https://drive.google.com/file/d/1VxzEoBQdOyDDXzMOXmPHoz9Ic4waBMch/view"}
-        ]},
-        { title: "❄️ A Era do Gelo", dur: "~90 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1A2tHf77Gq0m9upcZhz_0C9LW0XaY5ZDM/view"},
-            {l: "2", u: "https://drive.google.com/file/d/1KhUII2uqa8AvIBAMKE2WGbc0x7GbXNpr/view"},
-            {l: "3", u: "https://drive.google.com/file/d/1SDqRYt17-d5ITPCaA2-m921MnB9Ytlq7/view"},
-            {l: "4", u: "https://drive.google.com/file/d/1RilhUCEbGjWwJMPygjd8wIlNPvgUF5XD/view"}
-        ]},
-        { title: "🌕 Meu Malvado Favorito", dur: "~95 min", rat: "L", rC: "livre", links: [
-            {l: "1", u: "https://drive.google.com/file/d/1dBNIfCyEaYJFz7ADPKFADFsFTQLaMuFf/view"},
-            {l: "2", u: "https://drive.google.com/file/d/13pMcaTCF8MybGBqC1H--yapKZ2F3PxdR/view"}
-        ]}
+        { title: "🏄‍♂️ Tá Dando Onda", dur: "85 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1SdJFXsH-0HB7s7coTY1p_KDr4NDNVQQv/view"},{l: "2", u: "https://drive.google.com/file/d/0BwYoy_U8Yan8LXhtVWs5S3JsaEE/view"}]},
+        { title: "🔥 Como Treinar o seu Dragão", dur: "~95 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1vB6AVXPPOS8Qgadu0Pmwd8XVM6PFLAbB/view"},{l: "2", u: "https://drive.google.com/file/d/1Yh1t1gPw9wo8cAYZwUQOJgbS0cZqXs9x/view"},{l: "3", u: "https://drive.google.com/file/d/1tLHHKQoegzNkkWQLIeYIpLJAVIbbzgYz/view"}]},
+        { title: "🎒 Deu a Louca na Chapeuzinho", dur: "~80 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1out2aW68QeyHxxc9jOwckJlrGc7VfQIE/view"},{l: "2", u: "https://drive.google.com/file/d/16Di_SCRLv3rcsRTonhzxJ3dZuzMZekGn/view"}]},
+        { title: "👹 Shrek", dur: "~90 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/16m3-0bhs7lm8OJsEbmH7sEnHA2PCV0pJ/view"},{l: "2", u: "https://drive.google.com/file/d/16obIMObq9fwjvcrtqvWtWMIkeBD03mjB/view"},{l: "3", u: "https://drive.google.com/file/d/16tAEk7LC3sS48A-O0Fx1WuDS0BN1SweS/view"},{l: "4", u: "https://drive.google.com/file/d/16wU4J9beNwBIQiwyHvgjuzNMZw9GqpUW/view"}]},
+        { title: "🐈 O Gato de Botas", dur: "~95 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1dazkiCXELE35EGwP70Cvy4nvfyLvt_Sz/view"},{l: "2", u: "https://drive.google.com/file/d/1KiKWs3yH_uV1z1rg82pjJ_YTDKkBwpKr/view"}]},
+        { title: "🦒 Madagascar", dur: "~90 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1VnC7qSxnL-y-04q_snxUniyzz9AsLPP-/view"},{l: "2", u: "https://drive.google.com/file/d/1VuAameCMpXe5oUn7oc8P8yNPQWcM7f3d/view"},{l: "3", u: "https://drive.google.com/file/d/1VxzEoBQdOyDDXzMOXmPHoz9Ic4waBMch/view"}]},
+        { title: "❄️ A Era do Gelo", dur: "~90 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1A2tHf77Gq0m9upcZhz_0C9LW0XaY5ZDM/view"},{l: "2", u: "https://drive.google.com/file/d/1KhUII2uqa8AvIBAMKE2WGbc0x7GbXNpr/view"},{l: "3", u: "https://drive.google.com/file/d/1SDqRYt17-d5ITPCaA2-m921MnB9Ytlq7/view"},{l: "4", u: "https://drive.google.com/file/d/1RilhUCEbGjWwJMPygjd8wIlNPvgUF5XD/view"}]},
+        { title: "🌕 Meu Malvado Favorito", dur: "~95 min", rat: "L", rC: "livre", links: [{l: "1", u: "https://drive.google.com/file/d/1dBNIfCyEaYJFz7ADPKFADFsFTQLaMuFf/view"},{l: "2", u: "https://drive.google.com/file/d/13pMcaTCF8MybGBqC1H--yapKZ2F3PxdR/view"}]}
     ];
 
     const tbody = document.getElementById('movie-list');
