@@ -1,101 +1,130 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="https://aniversariomariah22.my.canva.site/jgg/_assets/media/e51924df3888b4556d8a33aedcdc2ffc.png">
     <title>Dicas de Filmes - Professor Lian Ribeiro</title>
     <style>
-        :root {
-            --primary: #0366d6; 
-            --secondary: #24292e; 
-            --accent: #28a745; 
-            --bg: #f6f8fa;
-            --text: #24292e;
-        }
-
+        * { box-sizing: border-box; }
+        html, body { margin: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            margin: 0; padding: 0;
+            position: relative; min-height: 100vh;
+            font-family: 'Segoe UI', Verdana, sans-serif; color: #fff;
+            background: linear-gradient(160deg, #000 0%, #0a1a3a 35%, #123a6b 100%);
+            background-attachment: fixed;
+            display: flex; flex-direction: column;
         }
-
-        header {
-            background: linear-gradient(135deg, var(--secondary), #1b1f23);
-            color: white;
-            padding: 3rem 1rem;
-            text-align: center;
-            border-bottom: 5px solid var(--primary);
+        /* grade e pontinhos, igual ao site de aulas */
+        body::before {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image:
+                linear-gradient(0deg, rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+            background-size: 42px 42px;
         }
+        body::after {
+            content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background:
+                radial-gradient(circle at 8px 8px, rgba(255,255,255,.15) 2px, transparent 2.5px) 0 0/42px 42px,
+                radial-gradient(circle at 900px 200px, rgba(255,255,255,.06) 0, transparent 60%);
+        }
+        header, .hero, main, footer { position: relative; z-index: 1; }
 
-        header h1 { margin: 0; font-size: 2.2rem; }
-        header .subtitle { margin-top: 10px; font-size: 1.2rem; color: #c8e1ff; font-weight: 500;}
-        header .update-info { margin-top: 8px; font-size: 0.95rem; color: #a3cbf7; font-style: italic; font-weight: 400; }
+        header { display: flex; align-items: center; justify-content: space-between; padding: 2vh 2.4vw; flex-wrap: wrap; gap: 10px; }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; }
+        .titulo-wrap { display: flex; align-items: center; gap: 12px; }
+        .emoji-pc { font-size: 34px; }
+        .brand h1 { margin: 0; font-size: 27px; font-weight: 700; }
+        .brand p { margin: 3px 0 0; opacity: .85; font-size: 14px; font-weight: 500; }
 
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .hero { text-align: center; padding: 0 20px 1.6vh; }
+        .hero h2 { font-size: clamp(18px, 2.6vw, 28px); margin: 0; font-weight: 700; }
+        .hero p { margin: 6px 0 0; font-size: 14px; opacity: .8; }
+
+        main { flex: 1; width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 2.4vw 3vh; }
+
+        .toolbar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+        .search {
+            flex: 1; min-width: 220px; display: flex; align-items: center; gap: 8px;
+            background: #fff; border-radius: 18px; padding: 0 16px; color: #123a6b;
+        }
+        .search input { flex: 1; border: none; outline: none; background: transparent; font-family: inherit; font-size: 16px; padding: 14px 0; color: #123a6b; }
+        .search input::placeholder { color: #123a6b; opacity: .5; }
+        .filters { display: flex; gap: 8px; }
+        .chip {
+            font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: #fff;
+            background: transparent; border: 2px solid #fff; border-radius: 8px; padding: 0 16px; transition: .2s;
+        }
+        .chip:hover, .chip.active { background: #fff; color: #123a6b; }
 
         .table-container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            overflow-x: auto;
-            border: 1px solid #e1e4e8;
-            text-align: left;
-            margin-bottom: 25px;
+            background: #fff; color: #123a6b; border-radius: 18px; overflow: hidden; overflow-x: auto;
+            box-shadow: 0 8px 24px rgba(0,0,0,.35);
         }
+        table { width: 100%; border-collapse: collapse; }
+        thead th { text-align: left; background: #123a6b; color: #fff; font-size: 14px; letter-spacing: .5px; text-transform: uppercase; padding: 15px 20px; }
+        td { padding: 14px 20px; border-bottom: 1px solid #e3eaf5; font-size: 15px; }
+        tbody tr { transition: background .2s; }
+        tbody tr:hover { background: #eef4fc; }
+        .movie-title { font-weight: 800; }
+        .dur { opacity: .7; white-space: nowrap; }
 
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        thead { background-color: var(--primary); color: white; }
-        th, td { padding: 15px 20px; border-bottom: 1px solid #e1e4e8; }
-        
-        tbody tr:hover { background-color: #f1f8ff; }
-
-        .movie-title { font-weight: bold; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
-        
-        .badge {
-            padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; color: white;
-        }
-        .badge.livre { background-color: var(--accent); }
-        .badge.dez { background-color: #f39c12; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 800; color: #fff; white-space: nowrap; }
+        .badge.livre { background: #2e9e57; }
+        .badge.dez { background: #e69500; }
 
         .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
         .btn-watch {
-            background: var(--primary); color: white; text-decoration: none;
-            padding: 6px 14px; border-radius: 6px; font-size: 0.8rem;
-            font-weight: 600; cursor: pointer; border: none; transition: 0.2s;
+            font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+            color: #fff; background: #123a6b; border: none; border-radius: 8px; padding: 7px 14px;
+            transition: .2s transform, .2s box-shadow, .2s background;
         }
-        .btn-watch:hover { background: #0056b3; transform: translateY(-2px); }
+        .btn-watch:hover { background: #1b5aa6; transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,.3); }
+
+        .empty { display: none; text-align: center; padding: 30px; color: #123a6b; opacity: .7; }
 
         /* Modal */
-        .modal {
-            display: none; position: fixed; z-index: 1000;
-            left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
-        }
-        .modal-content { position: relative; width: 90%; max-width: 1000px; height: 80%; background: #000; border-radius: 8px; }
-        .close-btn { position: absolute; top: -40px; right: 0; color: white; font-size: 35px; cursor: pointer; }
-        iframe { width: 100%; height: 100%; border: none; border-radius: 8px;}
+        .modal { display: none; position: fixed; z-index: 1000; inset: 0; background: rgba(0,0,0,.92); justify-content: center; align-items: center; }
+        .modal-content { position: relative; width: 92%; max-width: 1000px; height: 80%; background: #000; border-radius: 14px; border: 3px solid #fff; }
+        .close-btn { position: absolute; top: -44px; right: 0; color: #fff; font-size: 36px; line-height: 1; cursor: pointer; }
+        iframe { width: 100%; height: 100%; border: none; border-radius: 11px; }
 
-        footer { 
-            text-align: center; 
-            padding: 40px; 
-            color: #586069; 
-            background: white;
-            border-top: 1px solid #e1e4e8;
-            margin-top: 40px;
-        }
-        footer p { margin: 5px 0; font-size: 0.95rem; }
+        .site-footer { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 10px 12px 14px; }
+        .foot-msg { font-size: 15px; }
+        .foot-fixed { font-size: 11px; opacity: .6; line-height: 1.5; }
+
+        @media (max-width: 640px) { th, td { padding: 12px; } .filters { width: 100%; } .chip { flex: 1; padding: 10px; } .brand h1 { font-size: 22px; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Dicas de Filmes</h1>
-    <p class="subtitle">🎬💻 Professor de Informática Lian Ribeiro</p>
-    <p class="update-info">Lista atualizada mensalmente</p>
+    <div class="brand">
+        <img src="https://aniversariomariah22.my.canva.site/jgg/_assets/media/e51924df3888b4556d8a33aedcdc2ffc.png" alt="Foto do professor">
+        <div>
+            <div class="titulo-wrap"><span class="emoji-pc">🎬</span><h1>Dicas de Filmes</h1></div>
+            <p>Professor Lian Ribeiro</p>
+        </div>
+    </div>
 </header>
 
-<div class="container">
+<div class="hero">
+    <h2>Escolha um filme e bom divertimento!</h2>
+    <p>Lista atualizada mensalmente</p>
+</div>
+
+<main>
+    <div class="toolbar">
+        <label class="search"><span>🔍</span><input id="search" type="text" placeholder="Buscar filme..." autocomplete="off"></label>
+        <div class="filters">
+            <button class="chip active" data-f="all">Todos</button>
+            <button class="chip" data-f="livre">Livre</button>
+            <button class="chip" data-f="dez">10 anos</button>
+        </div>
+    </div>
+
     <div class="table-container">
         <table>
             <thead>
@@ -106,12 +135,11 @@
                     <th>Assistir</th>
                 </tr>
             </thead>
-            <tbody id="movie-list">
-                <!-- Conteúdo gerado via JavaScript -->
-            </tbody>
+            <tbody id="movie-list"></tbody>
         </table>
+        <div class="empty" id="empty">Nenhum filme encontrado.</div>
     </div>
-</div>
+</main>
 
 <div id="videoModal" class="modal">
     <div class="modal-content">
@@ -120,8 +148,9 @@
     </div>
 </div>
 
-<footer>
-    <p>© <span id="ano-atual"></span> Professor de informática Lian Ribeiro</p>
+<footer class="site-footer">
+    <div class="foot-msg">Boa sessão de cinema!</div>
+    <div class="foot-fixed">Dúvidas e informações: Lian.ribeiro@edu.uberabadigital.br<br>© <span id="ano-atual"></span> Professor de informática Lian Ribeiro</div>
 </footer>
 
 <script>
@@ -129,7 +158,7 @@
 
     const movies = [
         { title: "📺 Desenhos (Chaves, Pateta, Luluzinha, Thundercats e outros...)", dur: "Menos de 50min", rat: "L", rC: "livre", links: [{l: "Abrir Pasta", u: "https://drive.google.com/drive/folders/0B1lPp7clarJhNVRIdVBoNGdROHc?resourcekey=0-7ikvay_eGGhmKGX4Q_ohYg"}] },
-        
+
         { title: "🐼 Red: Crescer é uma Fera", dur: "100 min", rat: "L", rC: "livre", links: [{l: "Filme", u: "https://drive.google.com/file/d/1oPSCCKT86kGlVkzYlPSWWg8R3QjmCBGT/view"}] },
         { title: "🍔 Tá chovendo hambúrguer", dur: "~95 min", rat: "L", rC: "livre", links: [
             {l: "Filme 1", u: "https://drive.google.com/file/d/1eO0AWTFGY3AcGdpMk0IxwDLRYQk38T_L/view?usp=drivesdk"},
@@ -185,36 +214,48 @@
     ];
 
     const tbody = document.getElementById('movie-list');
+    const emptyEl = document.getElementById('empty');
+    let filter = 'all', query = '';
+    const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 
-    movies.forEach(m => {
-        const tr = document.createElement('tr');
-        let btns = `<div class="btn-group">`;
-        m.links.forEach(link => {
-            btns += `<button class="btn-watch" onclick="openModal('${link.u}')">${link.l}</button>`;
+    function render() {
+        tbody.innerHTML = '';
+        const list = movies.filter(m => (filter === 'all' || m.rC === filter) && norm(m.title).includes(norm(query)));
+        list.forEach(m => {
+            const tr = document.createElement('tr');
+            let btns = `<div class="btn-group">`;
+            m.links.forEach(link => { btns += `<button class="btn-watch" data-url="${link.u}">▶ ${link.l}</button>`; });
+            btns += `</div>`;
+            tr.innerHTML = `
+                <td><div class="movie-title">${m.title}</div></td>
+                <td class="dur">${m.dur}</td>
+                <td><span class="badge ${m.rC}">${m.rat === 'L' ? 'Livre' : m.rat + ' anos'}</span></td>
+                <td>${btns}</td>`;
+            tbody.appendChild(tr);
         });
-        btns += `</div>`;
+        emptyEl.style.display = list.length ? 'none' : 'block';
+    }
 
-        tr.innerHTML = `
-            <td><div class="movie-title">${m.title}</div></td>
-            <td>${m.dur}</td>
-            <td><span class="badge ${m.rC}">${m.rat === 'L' ? 'Livre' : m.rat + ' anos'}</span></td>
-            <td>${btns}</td>
-        `;
-        tbody.appendChild(tr);
-    });
+    tbody.addEventListener('click', e => { const b = e.target.closest('.btn-watch'); if (b) openModal(b.dataset.url); });
+    document.getElementById('search').addEventListener('input', e => { query = e.target.value; render(); });
+    document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+        document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+        c.classList.add('active'); filter = c.dataset.f; render();
+    }));
 
     function openModal(u) {
-        if(u.includes('folders') || u.includes('photos')) { window.open(u, '_blank'); return; }
+        if (u.includes('folders') || u.includes('photos')) { window.open(u, '_blank'); return; }
         document.getElementById('videoFrame').src = u.replace(/\/view(\?.*)?/, '/preview');
         document.getElementById('videoModal').style.display = 'flex';
     }
-
     function closeModal() {
         document.getElementById('videoModal').style.display = 'none';
         document.getElementById('videoFrame').src = '';
     }
+    window.onclick = e => { if (e.target == document.getElementById('videoModal')) closeModal(); };
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    window.onclick = (e) => { if(e.target == document.getElementById('videoModal')) closeModal(); }
+    render();
 </script>
 </body>
 </html>
